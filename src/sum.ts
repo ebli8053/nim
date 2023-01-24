@@ -1,5 +1,5 @@
-function sum3(a, b, c) {
-    return a + b + c;
-  }
+function sum3(a: number, b: number, c: number) {
+  return a + b + c;
+}
 
-export{sum3};
+export { sum3 };
