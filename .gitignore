@@ -1,3 +1,5 @@
-*.js
+# dont version the node_modules
 node_modules
+
+# discard the build output
 build
