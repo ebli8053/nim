@@ -15,3 +15,7 @@ You can safely ignore that file and pretend it does not exist.
 Running Jest on windows can sometimes be VERY slow. A test that should take 1.5 seconds takes 30 seconds when running on some windows file system. Moving the code to the linux partition of WSL solves the problem.
 
 Jest will also crash mysteriously if your node version is too old. Using a recent version of node should do it.
+
+This project assumes we use CommonJS modules, since that is the "normal" thing to do in typescript node.js applications. Some libraries on npm are not compatible with CommonJS, but only provide ECMAscript modules. One such example is `random`. If you get such problems, simple use another library.
+
+Writing cli apps in plain node.js is not advisable. One could use https://nodejs.org/api/readline.html#readline, but this is a pains since it is callback based, or promises based (will be similar experience to callbacks. equally bad.

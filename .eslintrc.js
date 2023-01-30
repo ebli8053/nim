@@ -12,4 +12,7 @@ module.exports = {
     project: ["./tsconfig.json"],
   },
   root: true,
+  rules: {
+    "@typescript-eslint/restrict-plus-operands": "off"
+  }
 };
