@@ -1,7 +1,7 @@
 import {format_score, rand_int} from "./myLib";
-import prompt_creator = require("prompt-sync");
+import * as PromptSync from "prompt-sync";
 
-const prompt: (s: string) => string = prompt_creator({sigint:true});
+const prompt: PromptSync.Prompt = PromptSync({sigint:true});
 
 function guess_loop(true_number: number, guesses_made = 0): number {
     const guess_string = prompt("Guess an intger number between 0 and 100: ");

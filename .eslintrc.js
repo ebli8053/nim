@@ -14,14 +14,11 @@ module.exports = {
   root: true,
   rules: {
     "@typescript-eslint/restrict-plus-operands": "off", // makes "I am " + age + " years old" possible for combining number with string
-    "@typescript-eslint/indent": "off",                 // eslint have other indentation rules than PKD course
-    "@typescript-eslint/no-require-imports": "off",     // needed for the prompt-sync library
+    "@typescript-eslint/indent": "off", // eslint have other indentation rules than PKD course
     "@typescript-eslint/semi": "error",
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/space-before-blocks": "warn", // helps enforce space before curly in style guide, as specified for function formatting
-    "@typescript-eslint/naming-convention": [
-      "error",
-      { "selector": "default", "format": ["snake_case"] }
-    ]
+    "@typescript-eslint/naming-convention": ["error", { selector: "default", format: ["snake_case"] }],
+    "@typescript-eslint/array-type": ["error", { default: 'generic' }]
   }
 };
