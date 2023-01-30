@@ -1,7 +1,15 @@
 
 
-function foo(x:number) {
-  return x+1;
+function format_score(x: number) {
+  return  x == 1
+              ? "WOW! Hole in one!"
+          : x < 3
+              ? "well done"
+          : x < 5
+              ? "Good job."
+          : x < 10
+              ? "You made it!"
+              : "You found it... eventually.";
 }
 
 function randInt(min: number, max: number) {
@@ -10,4 +18,4 @@ function randInt(min: number, max: number) {
   )
 }
 
-export { randInt, foo };
+export { randInt, format_score };

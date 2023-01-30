@@ -1,9 +1,4 @@
 {
-  "scripts": {
-    "start": "npx tsc && npx node build/main.js",
-    "test": "jest",
-    "lint": "eslint ."
-  },
   "devDependencies": {
     "@types/jest": "^29.2.6",
     "@types/prompt-sync": "^4.2.0",

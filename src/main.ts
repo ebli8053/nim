@@ -1,4 +1,4 @@
-import { randInt } from './myLib';
+import { format_score, randInt } from './myLib';
 import prompt_creator = require('prompt-sync');
 
 const prompt:(s:string) => string = prompt_creator({sigint:true});
@@ -23,7 +23,8 @@ function guessLoop(trueVal: number, x = 0): number {
 function playOnce() {
   const true_value = randInt(0, 100);
   const m = guessLoop(true_value, 0);
-  console.log("Bravo! You did it in " + m + " tries");
+  console.log(format_score(m))
+  console.log("It took " + m + " tries to complete.");
 }
 
 function askPlay() {
