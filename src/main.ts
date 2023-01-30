@@ -1,44 +1,44 @@
-import { format_score, randInt } from './myLib';
-import prompt_creator = require('prompt-sync');
+import {format_score, rand_int} from "./myLib";
+import prompt_creator = require("prompt-sync");
 
-const prompt:(s:string) => string = prompt_creator({sigint:true});
+const prompt: (s: string) => string = prompt_creator({sigint:true});
 
-function guessLoop(trueVal: number, x = 0): number {
-  const rawGuess = prompt("Guess an intger number between 0 and 100: ")
-  const intGuess = Number.parseInt(rawGuess, 10);
-  if (Number.isNaN(intGuess)) {
-    console.log("Sorry. Not a number");
-    return guessLoop(trueVal, x);
-  } else if (intGuess < trueVal) {
-    console.log("Sorry. "+intGuess+" is too low.");
-    return guessLoop(trueVal, x + 1);
-  } else if (intGuess > trueVal) {
-    console.log("Sorry. "+intGuess+" is too high.");
-    return guessLoop(trueVal, x + 1);
-  } else {
-    return x + 1;
-  }
+function guess_loop(true_number: number, guesses_made = 0): number {
+    const guess_string = prompt("Guess an intger number between 0 and 100: ");
+    const guess_int = Number.parseInt(guess_string, 10);
+    if (Number.isNaN(guess_int)) {
+        console.log("Sorry. Not a number");
+        return guess_loop(true_number, guesses_made);
+    } else if (guess_int < true_number) {
+        console.log("Sorry. " + guess_int + " is too low.");
+        return guess_loop(true_number, guesses_made + 1);
+    } else if (guess_int > true_number) {
+        console.log("Sorry. " + guess_int + " is too high.");
+        return guess_loop(true_number, guesses_made + 1);
+    } else {
+        return guesses_made + 1;
+    }
 }
 
-function playOnce() {
-  const true_value = randInt(0, 100);
-  const m = guessLoop(true_value, 0);
-  console.log(format_score(m))
-  console.log("It took " + m + " tries to complete.");
+function play_once(): void {
+    const true_value = rand_int(0, 100);
+    const m = guess_loop(true_value, 0);
+    console.log(format_score(m));
+    console.log("It took " + m + " tries to complete.");
 }
 
-function askPlay() {
-    const doPlayRaw: string = prompt("Wanna play? (y/n)")
-    if (doPlayRaw === "y") {
-        playOnce();
-        askPlay();
-    } else if (doPlayRaw === 'n') {
+function ask_play(): void {
+    const do_play: string = prompt("Wanna play? (y/n)");
+    if (do_play === "y") {
+        play_once();
+        ask_play();
+    } else if (do_play === "n") {
         console.log("Goodbye!");
-        process.exit()
+        process.exit();
     } else {
         console.log("Not recognized.");
-        askPlay();
+        ask_play();
     }
-  }
+}
 
-askPlay();
+ask_play();
