@@ -21,7 +21,7 @@ function read_move(): Move {
  * @returns true if all piles are empty
  */
 function is_winning(gs: GameState): boolean {
-    return gs.map((x: Number) => x == 0).reduce((previous: boolean, current: boolean) => previous && current, true);
+    return gs.map((x: number) => x == 0).reduce((previous: boolean, current: boolean) => previous && current, true);
 }
 
 /**
