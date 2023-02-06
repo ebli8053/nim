@@ -15,15 +15,20 @@ function read_move(): Move {
         return m;
     }
 }
-
+/**
+ * Check if  a certain game state is in a winning conditon
+ * @param gs the game state to test
+ * @returns true if all piles are empty
+ */
 function is_winning(gs: GameState): boolean {
     return gs.map((x: Number) => x == 0).reduce((previous: boolean, current: boolean) => previous && current, true);
 }
 
 /**
+ * Apply a move to a game state
  * @precondition move is valid
- * @param gs 
- * @param m 
+ * @param gs the game state before the move
+ * @param m the move
  */
 function play_move(gs: GameState, m: Move): GameState {
     const gs_after: GameState = [gs[0], gs[1], gs[2]];
@@ -32,7 +37,7 @@ function play_move(gs: GameState, m: Move): GameState {
 }
 
 /**
- * 
+ * Produce a new starting board
  * @returns a fresh game state
  */
 function make_game(): GameState {
