@@ -1,8 +1,7 @@
-import { parse_move, Move, GameState, Player } from "./nim_lib";
+import { validate_move, parse_move, Move, GameState, Player } from "./nim_lib";
 import * as PromptSync from "prompt-sync";
 
 const prompt: PromptSync.Prompt = PromptSync({ sigint: true });
-
 
 function read_move(): Move {
     console.log("How many stones do you want to pick? Format: [pile,stones]");
@@ -14,16 +13,6 @@ function read_move(): Move {
     }
     else {
         return m;
-    }
-}
-
-
-function validate_move(gs: GameState, m: Move): boolean {
-    const n = m.count;
-    if (m.pile < gs.length && gs[m.pile] >= n && n > 0) {
-        return true;
-    } else {
-        return false;
     }
 }
 

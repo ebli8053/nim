@@ -19,5 +19,20 @@ export function parse_move(s:string): Move | undefined {
   }
 }
 
+/**
+ * check if one may play a proposed move on a certain game state
+ * @param gs the current state of game
+ * @param m the proposed move
+ * @returns true if move is valid
+ */
+export function validate_move(gs: GameState, m: Move): boolean {
+  const n = m.count;
+  if (m.pile < gs.length && gs[m.pile] >= n && n > 0) {
+      return true;
+  } else {
+      return false;
+  }
+}
+
 
 
