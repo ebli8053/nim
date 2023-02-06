@@ -72,7 +72,10 @@ function play(gs: GameState): void {
         gs = computer_move(gs);
         if (is_winning(gs)) {
             console.log("Computer won!");
-        } else { play(gs); }
+            main();
+        } else {
+            play(gs);
+        }
     }
 
 }
