@@ -1,44 +1,113 @@
-import {format_score, rand_int} from "./myLib";
+import { parse_move, Move, GameState, Player } from "./nim_lib";
 import * as PromptSync from "prompt-sync";
 
-const prompt: PromptSync.Prompt = PromptSync({sigint:true});
+const prompt: PromptSync.Prompt = PromptSync({ sigint: true });
 
-function guess_loop(true_number: number, guesses_made = 0): number {
-    const guess_string = prompt("Guess an intger number between 0 and 100: ");
-    const guess_int = Number.parseInt(guess_string, 10);
-    if (Number.isNaN(guess_int)) {
-        console.log("Sorry. Not a number");
-        return guess_loop(true_number, guesses_made);
-    } else if (guess_int < true_number) {
-        console.log("Sorry. " + guess_int + " is too low.");
-        return guess_loop(true_number, guesses_made + 1);
-    } else if (guess_int > true_number) {
-        console.log("Sorry. " + guess_int + " is too high.");
-        return guess_loop(true_number, guesses_made + 1);
-    } else {
-        return guesses_made + 1;
+
+function read_move(): Move {
+    console.log("How many stones do you want to pick? Format: [pile,stones]");
+    const move_str: string = prompt("> ");
+    const m = parse_move(move_str);
+    if (m === undefined) {
+        console.log(`Could not interpret ${move_str} as a move`);
+        return read_move();
+    }
+    else {
+        return m;
     }
 }
 
-function play_once(): void {
-    const true_value = rand_int(0, 100);
-    const m = guess_loop(true_value, 0);
-    console.log(format_score(m));
-    console.log("It took " + m + " tries to complete.");
-}
 
-function ask_play(): void {
-    const do_play: string = prompt("Wanna play? (y/n)");
-    if (do_play === "y") {
-        play_once();
-        ask_play();
-    } else if (do_play === "n") {
-        console.log("Goodbye!");
-        process.exit();
+function validate_move(gs: GameState, m: Move): boolean {
+    const n = m.count;
+    if (m.pile < gs.length && gs[m.pile] >= n && n > 0) {
+        return true;
     } else {
-        console.log("Not recognized.");
-        ask_play();
+        return false;
     }
 }
 
-ask_play();
+function is_winning(gs: GameState): boolean {
+    return gs.map((x: Number) => x == 0).reduce((previous: boolean, current: boolean) => previous && current, true);
+}
+
+/**
+ * @precondition move is valid
+ * @param gs 
+ * @param m 
+ */
+function play_move(gs: GameState, m: Move): GameState {
+    const gs_after: GameState = [gs[0], gs[1], gs[2]];
+    gs_after[m.pile] -= m.count;
+    return gs_after;
+}
+
+/**
+ * 
+ * @returns a fresh game state
+ */
+function make_game(): GameState {
+    return [4, 4, 4];
+}
+
+function show_game_state(gs: GameState): void {
+    console.log("Pile 0 contains " + gs[0] + " stones");
+    console.log("Pile 1 contains " + gs[1] + " stones");
+    console.log("Pile 2 contains " + gs[2] + " stones");
+}
+
+function print_move(p: Player, m: Move): void {
+    console.log(`${p} removes ${m.count} stones from pile ${m.pile}`);
+}
+
+
+
+function main(): void {
+    console.log("Welcome to Nim");
+    const gs = make_game();
+    play(gs);
+}
+
+function play(gs: GameState): void {
+    show_game_state(gs);
+    gs = player_move(gs);
+    if (is_winning(gs)) {
+        console.log("Player win!");
+        main();
+    } else {
+        gs = computer_move(gs);
+        if (is_winning(gs)) {
+            console.log("Computer won!");
+        } else { play(gs); }
+    }
+
+}
+
+
+function player_move(gs: GameState): GameState {
+    console.log("Your move.");
+    const m = read_move();
+    print_move("Player", m);
+    if (validate_move(gs, m)) {
+        return play_move(gs, m);
+    } else {
+        console.log("Invalid move.");
+        return player_move(gs);
+    }
+}
+
+function computer_move(gs: GameState): GameState {
+    const m = compute_computer_move(gs);
+    print_move("Computer", m);
+    return play_move(gs, m);
+}
+function compute_computer_move(gs: GameState): Move {
+    const [a, b, c] = gs;
+    return a > 0
+        ? { pile: 0, count: a }
+        : b > 0
+            ? { pile: 1, count: b }
+            : { pile: 2, count: c };
+}
+
+main();

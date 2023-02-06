@@ -1,8 +1,8 @@
 # Installation and running this project stub
 
-First, make sure to install `npm` in some way. It is the package manager commonly used with javascript and node.js. You can verify the installation with `npm --version` in the terminal.
+First, make sure to install `npm`. It is the package manager commonly used with javascript and node.js. You can verify the installation with `npm --version` in the terminal.
 
-Then install the required packages and dependencies with `npm install --include=dev`. This will read the file `package.json` and install what it needs to compile, run, test and lint the project. By running jest, eslint and tsc with the command `npx`, you can also make sure to use exactly the right version of them, so it matches the versions used to develop this stub.
+Then install the required packages and dependencies with `npm install --include=dev`. This will read the file `package.json` and install what it needs to compile, run, test and lint the project. By running jest, eslint and tsc via the command `npx`, you also make sure to use exactly the right version of them, so it matches the versions used to develop this project stub.
 
 - To run the tests, run `npx jest`. The configuration is specified in `.eslintrc.js`. You don't need to recompile the typescript manually.
 - To lint, run `npx eslint .`. The configuration is specified in `.eslintrc.js`
