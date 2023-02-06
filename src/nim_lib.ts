@@ -9,7 +9,7 @@ export type Player = string;
  * @returns a move. returning undefined means a parse error
  */
 export function parse_move(s:string): Move | undefined {
-  const regex = /^\[\s*(\d+),\s*(\d+)\s*\]$/g;
+  const regex = /^\[\s*(\d+)\s*,\s*(\d+)\s*\]$/g;
   const result = regex.exec(s);
   if (result?.[0] === undefined || result?.[1] === undefined) { 
       return undefined;
