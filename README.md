@@ -8,4 +8,4 @@ The instructions below assume your home folder for course work (where you have a
 3. Compile all code by `cd ~/PKD/lesson11` and `tsc *.ts`. (Do note that this compilation is in `--strict` mode if you did create the appropriate `tsconfig.json` while installing `eslint`)
 4. Run the code with `node main.js`
 
-When making changes to the code, run `jest .` and `eslint .` to make sure the code still passes all tests and fulfils the stiles.
+When making changes to the code, run `jest *.ts` and `eslint *.ts` to make sure the code still passes all tests and fulfils the stiles.
