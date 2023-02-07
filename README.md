@@ -1,4 +1,4 @@
-# Installing and running the game of Nim
+# A Game of Nim
 
 This repository contains the code for Lesson11 in he PKD course.
 
