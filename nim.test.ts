@@ -23,3 +23,7 @@ test("Must pick more than zero",()=>
 test("Cant pick more than max",()=>
   expect(validate_move([1,1,1],{pile:1,count:2})).toBe(false)
 );
+
+test("Take 4 stones returns False", () => 
+  expect(validate_move([4,4,4],{pile:1,count:4})).toBe(false)
+);

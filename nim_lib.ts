@@ -27,12 +27,9 @@ export function parse_move(s:string): Move | undefined {
  */
 export function validate_move(gs: GameState, m: Move): boolean {
   const n = m.count;
-  if (m.pile < gs.length && gs[m.pile] >= n && n > 0) {
+  if (m.pile < gs.length && gs[m.pile] >= n && n > 0 && n < 4) {
       return true;
   } else {
       return false;
   }
 }
-
-
-

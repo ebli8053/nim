@@ -41,7 +41,12 @@ function play_move(gs: GameState, m: Move): GameState {
  * @returns a fresh game state
  */
 function make_game(): GameState {
-    return [4, 4, 4];
+    function random_number(): number {
+    let random = Math.floor(Math.random()*20);
+    if (undefined)
+    return random
+    }
+    return [random_number(), random_number(), random_number()]
 }
 
 function show_game_state(gs: GameState): void {
